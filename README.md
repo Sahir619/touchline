@@ -7,7 +7,7 @@ Built for the **TxODDS World Cup Hackathon** (Consumer and Fan Experiences track
 | | |
 |---|---|
 | **Live app** | https://touchline-game.vercel.app |
-| **Demo video** | [YouTube](https://youtu.be/) · also in the repo at [`demo/touchline-demo.mp4`](demo/touchline-demo.mp4) |
+| **Demo video** | [`demo/touchline-demo.mp4`](demo/touchline-demo.mp4) |
 | **Chain** | Solana devnet (Metaplex Core trophies, free to claim) |
 | **Data** | TxLINE devnet, World Cup `competitionId 72` |
 
