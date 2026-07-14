@@ -1,0 +1,41 @@
+{
+  "name": "touchline",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Touchline \u2014 free-to-play World Cup prediction game on Solana, powered by TxLINE",
+  "packageManager": "pnpm@11.1.2",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "worker": "npm run start --workspace @touchline/worker",
+    "web": "npm run dev --workspace @touchline/web",
+    "dev:web": "turbo run dev --filter=@touchline/web",
+    "dev:worker": "turbo run dev --filter=@touchline/worker"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "@noble/hashes": "^1.8.0"
+    },
+    "packageExtensions": {
+      "@metaplex-foundation/mpl-core": {
+        "dependencies": {
+          "@noble/hashes": "^1.8.0"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# builds / caches
+.next/
+out/
+dist/
+build/
+.turbo/
+*.tsbuildinfo
+
+# env / secrets
+.env
+.env.*
+!.env.example
+*.keypair.json
+wallet*.json
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# os / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# large reference binaries (kept out of git)
+Touchline World Cup Prediction Game.zip
+_extracted/**/node_modules/
+
+# scratch
+*.local
+coverage/
+
+# playwright / dev screenshots
+.playwright-mcp/
+/touchline-today-*.png
+/tsconfig.tsbuildinfo
+
+# pglite data
+apps/worker/.data/
+*.pglite
+
+# QA screenshots & one-off verify scripts (local only)
+_archive/
+
+# planning / spec / QA documents and media (local only — repo is code only)
+/Touchline_*.md
+/Touchline_*.html
+/TxLINE_*
+/BOARD_VERIFICATION.md
+/DESIGN.md
+/PRODUCT.md
+/SAH-*
+/TOUCHLINE_UI_CRAFT_AUDIT.md
+/CLAUDE.md
+/docs/
+/_extracted/
+/.planning/
+/video/
+/scripts/decompose_winlist.py
+/leasechecka*.html
+/sah*.png
+/touchline-*.png
+/landing-hero.jpeg
+/e2e_verify.mjs
+/match_err.html
+/pnpm-lock.yaml.*
+apps/worker/sah*_*.mjs
+apps/worker/sah*_*.ts
+
+# local staging / one-off scripts and tooling state (never shipped)
+apps/worker/_*.ts
+*.stackdump
+/supabase/
+/scripts/
+/.claude/
+
+.vercel

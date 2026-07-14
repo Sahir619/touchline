@@ -1,0 +1,19 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+overrides:
+  "@noble/hashes": "^1.8.0"
+allowBuilds:
+  '@stellar/stellar-sdk': false
+  bigint-buffer: false
+  blake-hash: false
+  bufferutil: false
+  esbuild: true
+  protobufjs: false
+  sharp: true
+  tiny-secp256k1: false
+  unrs-resolver: true
+  usb: false
+  utf-8-validate: false
+patchedDependencies:
+  '@noble/hashes@2.2.0': patches/@noble__hashes@2.2.0.patch

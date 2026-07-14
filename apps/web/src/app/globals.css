@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   STADIUM NIGHT — Touchline design system
+   Dark, floodlit, broadcast. One electric accent. Strong, tight corners.
+   ============================================================================ */
+
+:root {
+  color-scheme: dark;
+
+  /* ---- Palette ---- */
+  --ink: #EAF1F7;            /* primary text (light on dark) */
+  --ink-soft: #8B98A8;       /* secondary text */
+  --emerald: #00E08A;        /* electric highlight — primary, brand, selected */
+  --emerald-deep: #21D98E;   /* readable green for links/labels + button hover */
+  --cyan: #2BE5FF;           /* on-chain pair */
+  --coral: #FF6A4D;          /* live, long-shot, urgency */
+  --canvas: #0A0E15;         /* base ground (stadium night) */
+
+  /* dark text on the bright green CTA */
+  --on-emerald: #03241B;
+
+  /* Trophy tiers */
+  --bronze: #D08A4E;         /* Outsider tier */
+  --silver: #AEBDC6;         /* Giant-killer tier */
+  --gold: #F2B33C;           /* Oracle tier */
+
+  /* The earned gradient — on-chain moments only (mints, verified, Legendary) */
+  --on-chain: linear-gradient(108deg, #00E08A, #2BE5FF);
+
+  /* ---- Background field: dark, with distant floodlit glows ---- */
+  --field:
+    radial-gradient(45% 38% at 12% -5%, rgba(0, 224, 138, 0.10) 0%, rgba(0, 224, 138, 0) 60%),
+    radial-gradient(42% 38% at 92% 0%, rgba(43, 229, 255, 0.09) 0%, rgba(43, 229, 255, 0) 62%),
+    radial-gradient(65% 55% at 50% 120%, rgba(255, 106, 77, 0.05) 0%, rgba(255, 106, 77, 0) 60%),
+    linear-gradient(180deg, #0B111B 0%, #080B12 100%);
+
+  /* ---- Glass recipe (dark; floating / overlay only) ---- */
+  --glass-bg: rgba(22, 30, 43, 0.58);
+  --glass-blur: 20px;
+  --glass-saturate: 130%;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+  --glass-radius: 12px;
+  --glass-shadow: 0 16px 44px rgba(0, 0, 0, 0.5);
+
+  /* ---- Solid surface (reading surfaces — dark elevated cards) ---- */
+  --solid-bg: #131B27;
+  --solid-border: 1px solid rgba(255, 255, 255, 0.07);
+  --solid-radius: 10px;
+
+  /* ---- Elevation: the one CTA glow under primary green (floodlit) ---- */
+  --glow-emerald: 0 0 22px rgba(0, 224, 138, 0.32);
+
+  /* ---- Radius scale — strong, tight corners ---- */
+  --radius-pill: 9px;    /* odds/tags/chips (rounded-rect, not pill) */
+  --radius-sm: 8px;      /* controls */
+  --radius-md: 10px;     /* solid cards */
+  --radius-lg: 12px;     /* glass */
+
+  /* ---- Spacing scale: 4 / 8 / 12 / 16 / 24 / 32 / 48 ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  /* ---- Motion (spec §5) ---- */
+  --ease-soft-settle: cubic-bezier(.2, .7, .3, 1); /* entrances / settling */
+  --ease-standard: cubic-bezier(.4, 0, .2, 1);     /* most UI */
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-medium: 360ms;
+  --dur-celebratory: 800ms;
+}
+
+/* ============================================================================
+   Tailwind v4 token mapping — utilities like bg-emerald / text-ink / font-display
+   ============================================================================ */
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-emerald: var(--emerald);
+  --color-emerald-deep: var(--emerald-deep);
+  --color-cyan: var(--cyan);
+  --color-coral: var(--coral);
+  --color-canvas: var(--canvas);
+  --color-on-emerald: var(--on-emerald);
+  --color-bronze: var(--bronze);
+  --color-silver: var(--silver);
+  --color-gold: var(--gold);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+
+  --radius-pill: var(--radius-pill);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+
+  --ease-soft-settle: var(--ease-soft-settle);
+  --ease-standard: var(--ease-standard);
+}
+
+/* ============================================================================
+   Base — Stadium Night (dark). Body wears the canvas field.
+   ============================================================================ */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--ink);
+  background-color: var(--canvas);
+  background-image: var(--field);
+  background-attachment: fixed;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tabular, lining numerals for any data surface */
+.tnum,
+.tabular {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ============================================================================
+   Utility surfaces
+   ============================================================================ */
+
+/* Glass — floating / overlay only (nav, pundit, sheets, mint cards) */
+.glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: var(--glass-border);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Solid dark — reading surfaces (elevated card, not the floating glass) */
+.solid {
+  background: var(--solid-bg);
+  border: var(--solid-border);
+  border-radius: var(--solid-radius);
+}
+
+/* The on-chain gradient surface — earned moments only */
+.on-chain {
+  background: var(--on-chain);
+}
+
+.on-chain-text {
+  background: var(--on-chain);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Primary green CTA glow */
+.glow-emerald {
+  box-shadow: var(--glow-emerald);
+}
+
+/* The background field as a fixed layer (use behind app frames) */
+.field {
+  background-color: var(--canvas);
+  background-image: var(--field);
+}
+
+/* ============================================================================
+   Reduced transparency → solid fallback (no blur)
+   ============================================================================ */
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: var(--solid-bg);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border: var(--solid-border);
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ============================================================================
+   Signature keyframes — copied verbatim from the design comp (Touchline.dc.html)
+   ============================================================================ */
+@keyframes tl-draw { to { stroke-dashoffset: 0 } }
+@keyframes tl-roll { 0% { opacity: 0; transform: translateX(-160px) } 28% { opacity: 1 } 100% { opacity: 1; transform: translateX(0) } }
+@keyframes tl-fade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes tl-rise { from { opacity: 0; transform: translateY(14px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes tl-pop { 0% { transform: scale(.6); opacity: 0 } 70% { transform: scale(1.06) } 100% { transform: scale(1); opacity: 1 } }
+@keyframes tl-spin { to { transform: rotate(360deg) } }
+@keyframes tl-heart { 0%, 100% { opacity: 1; transform: scale(1) } 50% { opacity: .4; transform: scale(.72) } }
+@keyframes tl-blobdrift { 0%, 100% { transform: translate(0, 0) scale(1) } 50% { transform: translate(18px, -14px) scale(1.06) } }
+@keyframes tl-odds { 0% { transform: translateY(-65%); opacity: 0 } 100% { transform: translateY(0); opacity: 1 } }
+@keyframes tl-arrowup { 0% { opacity: 0; transform: translateY(5px) } 30% { opacity: 1 } 100% { opacity: 0; transform: translateY(-7px) } }
+@keyframes tl-arrowdn { 0% { opacity: 0; transform: translateY(-5px) } 30% { opacity: 1 } 100% { opacity: 0; transform: translateY(7px) } }
+@keyframes tl-coin { 0% { transform: scale(.2); opacity: 0 } 62% { transform: scale(1.09) } 100% { transform: scale(1); opacity: 1 } }
+/* ends invisible: pair with fill-mode both, or the band snaps back to its
+   resting spot after the one-shot run and sits stuck on the card */
+@keyframes tl-sweep { 0% { transform: translateX(-130%) skewX(-12deg); opacity: 1 } 85% { opacity: 1 } 100% { transform: translateX(130%) skewX(-12deg); opacity: 0 } }
+@keyframes tl-particle { 0% { transform: translate(0, 0) scale(1); opacity: 1 } 100% { transform: translate(var(--tx, 0), var(--ty, 0)) scale(.25); opacity: 0 } }
+@keyframes tl-badge { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes tl-sheet { from { opacity: 0; transform: translateY(40px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes tl-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 106, 77, .0) } 50% { box-shadow: 0 0 0 4px rgba(255, 106, 77, .16) } }
+@keyframes tl-flamepulse { 0%, 100% { transform: scale(1) } 50% { transform: scale(1.18) } }
+@keyframes tl-ringdeplete { from { stroke-dashoffset: 0 } to { stroke-dashoffset: 69.1 } }
+@keyframes tl-sweeprot { to { transform: rotate(360deg) } }
+@keyframes tl-mote { 0% { transform: translateY(0) translateX(0); opacity: 0 } 12% { opacity: var(--o, .4) } 88% { opacity: var(--o, .4) } 100% { transform: translateY(-108vh) translateX(var(--dx, 0)); opacity: 0 } }
+@keyframes tl-beam { 0%, 100% { opacity: .28; transform: translateX(-4%) scaleY(1) } 50% { opacity: .5; transform: translateX(4%) scaleY(1.05) } }
+/* goal reaction burst — emoji fly out from centre (biased upward) and fade (spec: shared-moment) */
+@keyframes tl-goalfly { 0% { transform: translate(0, 0) scale(.4); opacity: 0 } 18% { opacity: 1; transform: translate(calc(var(--gx, 0) * .45), calc(var(--gy, 0) * .45)) scale(1.1) } 100% { transform: translate(var(--gx, 0), var(--gy, 0)) scale(.85); opacity: 0 } }
+@keyframes tl-goalcry { 0% { transform: scale(.4); opacity: 0 } 26% { transform: scale(1.1); opacity: 1 } 68% { transform: scale(1); opacity: 1 } 100% { transform: scale(1.02); opacity: 0 } }
+
+/* ============================================================================
+   Reduced motion → instant final state, no transform (spec §5)
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .tl-draw,
+  .tl-grad,
+  .tl-ball {
+    stroke-dashoffset: 0 !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
